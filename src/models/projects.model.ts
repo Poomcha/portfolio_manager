@@ -1,4 +1,4 @@
-// users-model.ts - A mongoose model
+// projects-model.ts - A mongoose model
 //
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
@@ -6,17 +6,11 @@ import { Application } from '../declarations';
 import { Model, Mongoose } from 'mongoose';
 
 export default function (app: Application): Model<any> {
-  const modelName = 'users';
+  const modelName = 'projects';
   const mongooseClient: Mongoose = app.get('mongooseClient');
-  const schema = new mongooseClient.Schema({
-  
-    email: { type: String, unique: true, lowercase: true, required: true },
-    password: { type: String, required: true },
-
-    admin: { type: Boolean, default: false },
-
-    portfolio: { type: String, default: undefined },  
-    
+  const { Schema } = mongooseClient;
+  const schema = new Schema({
+    text: { type: String, required: true }
   }, {
     timestamps: true
   });
