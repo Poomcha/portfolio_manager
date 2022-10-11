@@ -8,10 +8,6 @@ interface UserInterface {
   admin: boolean,
   email: string,
   password: string,
-  facebookId?: string,
-  twitterId?: string,
-  googleId?: string,
-  githubId?: string,
   portfolioAddress?: string,
 }
 
@@ -23,16 +19,12 @@ export class Users extends Service {
 
   // Create an user.
   create (data: UserInterface, params?: Params) {
-    const { email, password, facebookId, twitterId, googleId, githubId, portfolioAddress } = data
+    const { email, password, portfolioAddress } = data
 
     const userData = {
       admin: email === appconfig.admin,
       email,
       password,
-      facebookId,
-      twitterId,
-      googleId,
-      githubId,
       portfolioAddress,
     }
 
@@ -49,8 +41,8 @@ export class Users extends Service {
     return super.get(id, params)
   }
 
-  // Patch an user password.
+  // Patch an user.
   patch(id: NullableId, data: Partial<any>, params?: Params | undefined): Promise<any> {
-    return super.patch(id, data)
+    return super.patch(id, data, params)
   }
 }
